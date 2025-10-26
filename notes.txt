@@ -1,0 +1,21 @@
+What is hashing?
+
+Hashing means turning a piece of data (like a password) into a long, scrambled string using a math formula (hash function).
+Example:
+"mypassword" → "5f4dcc3b5aa765d61d8327deb882cf99"
+It’s one-way — you can’t turn it back into the original password.
+How it works for storing passwords:
+User signs up → enters a password.
+Server hashes the password (e.g., using bcrypt).
+Server saves only the hash in the database — not the real password.
+When user logs in later:
+Server hashes the entered password again
+Compares it to the stored hash
+If they match → login success 
+Hashing is one-way.
+You can turn a password → hash,
+but you cannot turn a hash → password again.
+That’s what makes hashing so useful for security — even if someone gets the hash from the database, they can’t reverse it to see the original password.
+
+
+In login API we create a token but not verify the token.
