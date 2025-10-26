@@ -1,20 +1,9 @@
-const express = require('express');
-const authMiddleware = require('../middleware/auth.middleware')
+const jwt = require('jsonwebtoken');
+const userModel = require('../models/user.model')   
 
 
 
-
-
-const router = express.Router();
-
-// POST /api/post {image-file} [protected] meaning if user is not logged in then they cannot access this API
-
-// router.post('/') // here we only written / in API name because already we have given /api/post in app.js so this route will directly work as /api/post/
-
-/*
-
-
-router.post('/', async (req,res)=>{
+async function authMiddleware(req,res,next){
     // To make API [protected]
     const token = req.cookies.token
     if(!token){ // no token meaning user is not logged in
@@ -37,25 +26,13 @@ router.post('/', async (req,res)=>{
         // here we are creating a new property in req property name is user, till now req.user property was not existing, but now we are creating a new property in req and property name is user.
         // yes we can create multiple properties in req and give any name to property here for better understanding we are giving property name user so we can get that user data is there
         req.user = user;
-
+        next();
     } catch (error) {
         return res.status(401).json({
             message:'Invalid token, please login again'
         })
     }
+}
 
 
-    // The API is now protected — if the token is not present or incorrect, the API cannot be accessed.
-
-
-    
-    
-})
-
-*/
-
-router.post('/',authMiddleware, createPostController)
-
-
-
-module.exports = router;
+module.exports = authMiddleware;

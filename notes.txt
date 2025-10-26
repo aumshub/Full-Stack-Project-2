@@ -19,3 +19,11 @@ That’s what makes hashing so useful for security — even if someone gets the 
 
 
 In login API we create a token but not verify the token.
+
+
+Creating custom middleware:
+As we need to keep some routes to be protected meaning if user is not logged in then they cannot be able to access that particular route/API so instead of writing the protected API code which is to check the token is present or not if yes the token is correct or no again and again we create a custom middleware where we write that code to  check and verify the the token only one time. to create a middleware we create a folder in src name middleware and in that we create a file called auth.middleware.js we write the logic there and export that function and use it wherever we want using require.
+
+eg:
+router.post('/',authMiddleware, createPostController)
+so first request will go to the api then to the middleware there if everything is correct then will create user property in req so in req.user will set userdata in req.user then next() in authMiddleware will call and the main req will go to the createPostController
