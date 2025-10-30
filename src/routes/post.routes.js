@@ -1,11 +1,19 @@
 const express = require('express');
-const authMiddleware = require('../middleware/auth.middleware')
+const authMiddleware = require('../middleware/auth.middleware');
+const multer = require('multer');
+const {createPostController} = require('../controller/post.controller')
+
 
 
 
 
 
 const router = express.Router();
+
+
+const upload = multer({
+    storage: multer.memoryStorage()
+})
 
 // POST /api/post {image-file} [protected] meaning if user is not logged in then they cannot access this API
 
@@ -54,7 +62,11 @@ router.post('/', async (req,res)=>{
 
 */
 
-router.post('/',authMiddleware, createPostController)
+
+router.post('/',
+    authMiddleware, // after next() will be called in authMiddleware then the request will pass on to createPostController 
+    upload.single("image"),
+     createPostController)
 
 
 

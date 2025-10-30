@@ -27,3 +27,33 @@ As we need to keep some routes to be protected meaning if user is not logged in 
 eg:
 router.post('/',authMiddleware, createPostController)
 so first request will go to the api then to the middleware there if everything is correct then will create user property in req so in req.user will set userdata in req.user then next() in authMiddleware will call and the main req will go to the createPostController
+
+
+
+
+Backend server cannot be able to read any file data by defult, we use multer package so that backend server can read the file data
+
+
+
+If we verify login token or register token both works because in both tokens the data is same only.
+
+
+
+AI functionality:
+text => text
+text => image
+text => audio
+text => video
+
+here we are using:
+image => text 
+
+
+Base64: converting image into string
+Base64 is not specifically an image converter; it is a binary-to-text encoding scheme .
+
+Images are Binary Data: When you save an image (like a JPG or PNG), it's stored on your computer as a sequence of binary bytes (a series of 1s and 0s).
+
+The Goal of Base64: Base64 takes any stream of binary bytes (whether it's an image, a PDF, or an audio file) and translates it into an equivalent ASCII text string.
+
+Why Do This? The main purpose is to safely transmit binary data across systems that are designed to handle only text (like older email protocols, embedding data directly within HTML/CSS/JSON files, or including data in a URL). Binary data can contain characters that older systems or certain protocols interpret as special commands (like "end of file" or "new line"), which can corrupt the data during transfer. Base64 ensures the data is "safe" by only using a set of 64 printable ASCII characters (A-Z, a-z, 0-9, +, /, and = for padding).
