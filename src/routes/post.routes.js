@@ -65,7 +65,7 @@ router.post('/', async (req,res)=>{
 
 router.post('/',
     authMiddleware, // after next() will be called in authMiddleware then the request will pass on to createPostController 
-    upload.single("image"),
+    upload.single("image"), // makes file readable to express can read the file data
      createPostController)
 
 
